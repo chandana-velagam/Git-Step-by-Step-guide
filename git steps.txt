@@ -1,0 +1,81 @@
+### Step 1: Open a Terminal/Command Prompt
+
+1. **Navigate to the Folder**:
+   Open a terminal (or Command Prompt on Windows) and navigate to the folder you want to upload.
+   
+   cd path/to/your/folder
+   
+
+### Step 2: Initialize Git
+
+1. **Initialize Git in the Folder**:
+   
+   git init
+   
+   This command sets up an empty Git repository in your folder.
+
+### Step 3: Check if You Have an SSH Key
+
+1. **Check for Existing SSH Keys**:
+   Run the following command to check if you already have an SSH key:
+   
+   ls ~/.ssh
+   
+   If you see files like `id_rsa` and `id_rsa.pub`, you have SSH keys. Otherwise, proceed to the next step to create them.
+
+### Step 4: Generate an SSH Key (if needed)
+
+1. **Generate SSH Key**:
+   
+   ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+   
+   Follow the prompts to save the key. You can press Enter to accept the default file location and skip setting a passphrase if you prefer.
+
+2. **Start the SSH Agent and Add Your Key**:
+   
+   eval "$(ssh-agent -s)"
+   ssh-add ~/.ssh/id_rsa
+   
+
+### Step 5: Add SSH Key to GitHub/GitLab
+
+1. **Copy the SSH Key**:
+   
+   cat ~/.ssh/id_rsa.pub
+   
+   Copy the output (your SSH public key).
+
+2. **Add the Key to Your Git Account**:
+   - For **GitHub**: Go to **Settings** > **SSH and GPG keys** > **New SSH key**.
+   - For **GitLab**: Go to **Settings** > **SSH Keys** > **Add SSH Key**.
+   - Paste your key, give it a title, and save.
+
+### Step 6: Set Up the Remote Repository
+
+1. **Create a Repository on GitHub/GitLab**:
+   - Go to GitHub or GitLab, create a new repository, and copy the SSH URL (it will look like `git@github.com:username/repository.git`).
+
+2. **Add the Repository as a Remote**:
+   
+   git remote add origin git@github.com:username/repository.git
+   
+
+### Step 7: Add, Commit, and Push Your Files
+
+1. **Add All Files to the Staging Area**:
+   
+   git add .
+   
+
+2. **Commit the Files**:
+   
+   git commit -m "Initial commit"
+   
+
+3. **Push Files to the Remote Repository**:
+   
+   git push -u origin master
+   
+   If prompted, confirm that you trust the repository by typing "yes."
+
+After these steps, all the files in your folder should be uploaded to the remote Git repository. You can now continue to work on the repository and push changes as needed.
